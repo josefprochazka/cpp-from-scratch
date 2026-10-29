@@ -1,0 +1,30 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+CMakeSettings.json
+CMakeUserPresets.json
+
+# CMake build složky (VS "Open Folder" staví do out/)
+out/
+build/
+cmake-build-*/
+
+# Výstupy překladu
+*.exe
+*.obj
+*.o
+*.pdb
+*.ilk
+*.idb
+*.lib
+*.exp
+
+# Data, která vytváří aplikace
+tasks.dat
+
+# Editory / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
