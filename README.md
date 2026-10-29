@@ -39,6 +39,22 @@ A ještě pár drobností navíc:
 - V Debug buildu ve Visual Studiu se zapne **detekce memory leaků** (`_CrtSetDbgFlag`), stejně jako v C verzi.
 - Bezpečné čtení vstupu: `std::getline` + `std::from_chars`, výsledek je `std::optional<int>` (`util.cpp`).
 
+## Druhý program: fronta (FIFO)
+
+Samostatný program `fronta.exe` (ve VS ho vybereš v **Select Startup Item**). Je to fronta lidí
+u pokladny napsaná od nuly jako **kruhový buffer**: šablona `Queue<T>` nad
+`std::vector<std::optional<T>>`, která se při zaplnění zvětší na dvojnásobek.
+
+- `push` přidá na konec, `pop` vezme z čela (vrací `std::optional`), `front` na prázdné frontě hází výjimku.
+- Po každé změně se vypíšou všechny sloty s adresami a kde je `head` a `tail`.
+- Volba 6 ukáže, jak index „přeteče“ přes konec pole zpátky na začátek a jak se pak buffer zvětší.
+
+| Soubor | Co v něm je |
+|---|---|
+| `fronta/queue.hpp` | samotná fronta `Queue<T>` (šablona, celá v hlavičce) |
+| `fronta/queue_view.cpp/.hpp` | výpis fronty a vnitřku bufferu |
+| `fronta/main.cpp` | menu a obsluha voleb |
+
 ## C vs. C++
 
 Stejná témata vedle sebe. C verze: **https://github.com/josefprochazka/c-from-scratch**
@@ -148,6 +164,10 @@ cmake -S . -B build && cmake --build build && ./build/cpp-from-scratch
 .
 ├── CMakeLists.txt       # build konfigurace (VS ji otevře přes Open Folder)
 ├── README.md
+├── fronta/              # druhý program: fronta (FIFO) jako kruhový buffer
+│   ├── main.cpp         # menu
+│   ├── queue.hpp        # šablona Queue<T>
+│   └── queue_view.cpp/.hpp  # výpisy
 └── src/
     ├── main.cpp         # menu jako std::vector lambd
     ├── util.cpp/.hpp    # print (std::format), read_line, read_int (std::optional)
